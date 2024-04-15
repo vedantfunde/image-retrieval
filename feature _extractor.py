@@ -66,11 +66,3 @@ for i in range(num_images):
 
 # Save the extracted features to a file
 np.save('extracted_features.npy', extracted_features)
-
-
-
-pca = PCA(n_components=512)
-reduced_features = pca.fit_transform(extracted_features)
-
-# Save the reduced-dimensional features to a file
-np.save('reduced_features.npy', reduced_features)
