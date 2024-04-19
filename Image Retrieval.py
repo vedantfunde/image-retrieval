@@ -1,26 +1,39 @@
+import gdown
+import numpy as np
+import requests
+from PIL import Image
+import matplotlib.pyplot as plt
+from sklearn.neighbors import NearestNeighbors
+import torch
+import torchvision.transforms as transforms
+import torchvision.models as models
+from io import BytesIO  # Import BytesIO module
+
+# Download the extracted features file
+print(extracted_features.shape)
+
 # Load pre-trained ResNet-50 model
 resnet = models.resnet50(pretrained=True)
 # Remove the last fully connected layer
-resnet = nn.Sequential(*list(resnet.children())[:-1])
+resnet = torch.nn.Sequential(*list(resnet.children())[:-1])
 # Set the model to evaluation mode
 resnet.eval()
-# Define a function to extract features from an input image using ResNet-50
-def extract_features_from_image(input_image_path, model):
+
+# Define functions for image retrieval
+def extract_features_from_image(input_image, model):
     preprocess = transforms.Compose([
         transforms.Resize(256),
         transforms.CenterCrop(224),
         transforms.ToTensor(),
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ])
-    image = Image.open(input_image_path)
-    image_tensor = preprocess(image)
+    image_tensor = preprocess(input_image)
     image_tensor = image_tensor.unsqueeze(0)
     with torch.no_grad():
         features = model(image_tensor)
     features = torch.flatten(features)
     return features.numpy()
 
-# Define a function to retrieve similar images based on an input image
 def retrieve_similar_images_from_input_image(input_image_features, k=5):
     predicted_label = svm_classifier.predict([input_image_features])[0]
     similar_indices = [i for i, label in enumerate(labels) if label == predicted_label]
@@ -30,11 +43,10 @@ def retrieve_similar_images_from_input_image(input_image_features, k=5):
     original_indices = [similar_indices[i] for i in indices[0]]
     return original_indices
 
-# Define a function to visualize retrieved images
-def visualize_retrieved_images(input_image_path, similar_image_indices):
+def visualize_retrieved_images(input_image, similar_image_indices):
     plt.figure(figsize=(15, 5))
     plt.subplot(1, 6, 1)
-    plt.imshow(Image.open(input_image_path))
+    plt.imshow(input_image)
     plt.title('Input Image')
     plt.axis('off')
 
@@ -47,8 +59,20 @@ def visualize_retrieved_images(input_image_path, similar_image_indices):
 
     plt.show()
 
-# Define a function to perform image retrieval
-def image_retrieval(input_image_path):
-    input_image_features = extract_features_from_image(input_image_path, resnet)
+def image_retrieval(input_image_url):
+    # Fetch the input image
+    response = requests.get(input_image_url)
+    input_image = Image.open(BytesIO(response.content))
+    
+    # Extract features from the input image
+    input_image_features = extract_features_from_image(input_image, resnet)
+    
+    # Retrieve similar images
     similar_image_indices = retrieve_similar_images_from_input_image(input_image_features)
-    visualize_retrieved_images(input_image_path, similar_image_indices)
+    
+    # Visualize retrieved images
+    visualize_retrieved_images(input_image, similar_image_indices)
+
+# Example usage
+input_image_url = 'https://drive.google.com/uc?id=1-LCCrr8zQGP19Zyn52IvmEAVGiJIdH0D'
+image_retrieval(input_image_url)
