@@ -1,16 +1,16 @@
 from sklearn.linear_model import LogisticRegression
 
-# Initialize Logistic Regression classifier
+#loading Logistic Regression classifier
 logistic_regression = LogisticRegression(max_iter=10000, random_state=42)
 
-# Fit the classifier to the training data
+#fitting the classifier to the training data
 # logistic_regression.fit(extracted_features, labels)
 # predicted_labels = logistic_regression.predict(test_extracted_features)
 
-# Make predictions on the test data
+#making predictions on the test data
 logistic_regression.fit(extracted_features, labels)
 predicted_labels = logistic_regression.predict(test_extracted_features)
 
-# Calculate accuracy
+#calculating accuracy
 accuracy = np.mean(predicted_labels == test_labels)
 print("Accuracy:", accuracy)
