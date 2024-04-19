@@ -7,19 +7,16 @@ from sklearn.neighbors import NearestNeighbors
 import torch
 import torchvision.transforms as transforms
 import torchvision.models as models
-from io import BytesIO  # Import BytesIO module
+from io import BytesIO
 
-# Download the extracted features file
-print(extracted_features.shape)
+#print(extracted_features.shape)
 
-# Load pre-trained ResNet-50 model
+#loading pre-trained ResNet-50 model
 resnet = models.resnet50(pretrained=True)
-# Remove the last fully connected layer
 resnet = torch.nn.Sequential(*list(resnet.children())[:-1])
-# Set the model to evaluation mode
 resnet.eval()
 
-# Define functions for image retrieval
+#function for image retrieval
 def extract_features_from_image(input_image, model):
     preprocess = transforms.Compose([
         transforms.Resize(256),
@@ -60,19 +57,19 @@ def visualize_retrieved_images(input_image, similar_image_indices):
     plt.show()
 
 def image_retrieval(input_image_url):
-    # Fetch the input image
+    #fetching the input image
     response = requests.get(input_image_url)
     input_image = Image.open(BytesIO(response.content))
     
-    # Extract features from the input image
+    #extracting features from the input image
     input_image_features = extract_features_from_image(input_image, resnet)
     
-    # Retrieve similar images
+    #retrieving similar images
     similar_image_indices = retrieve_similar_images_from_input_image(input_image_features)
     
-    # Visualize retrieved images
+    #visualizing retrieved images
     visualize_retrieved_images(input_image, similar_image_indices)
 
-# Example usage
-input_image_url = 'https://drive.google.com/uc?id=1-LCCrr8zQGP19Zyn52IvmEAVGiJIdH0D'
-image_retrieval(input_image_url)
+#example
+#input_image_url = 'https://drive.google.com/uc?id=1-LCCrr8zQGP19Zyn52IvmEAVGiJIdH0D'
+#image_retrieval(input_image_url)
