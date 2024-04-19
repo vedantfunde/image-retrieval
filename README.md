@@ -5,7 +5,7 @@
 - [Features](https://github.com/vedantfunde/supreme-giggle/blob/main/README.md#features)
 - [Demo Video](https://github.com/vedantfunde/supreme-giggle/blob/main/README.md#demo-video)
 - [Contributors](https://github.com/vedantfunde/supreme-giggle/blob/main/README.md#contributors)
-- [Acknowledgement](#acknowledgement)
+- [Acknowledgement](https://github.com/vedantfunde/supreme-giggle/blob/main/README.md#acknowledgement)
 
 ## Introduction
 This is a Python-based image retrieval model that utilizes various machine learning techniques. It employs CNN for feature extraction and then uses various ML techniques to varied results. The dataset used here is the CIFAR-10 dataset. You can check out the dataset [here](https://www.cs.toronto.edu/~kriz/cifar.html).
@@ -18,7 +18,7 @@ This is a Python-based image retrieval model that utilizes various machine learn
 **Note:** The model performs well when text and images are semantically similar to the images in the dataset.
 
 ## Demo Video
-[Content and Text Based Image Retrieval](#) <!-- Insert link to demo video here -->
+[Content Based Image Retrieval](#)
 
 ## Contributors
 - Vedant Funde
@@ -26,3 +26,6 @@ This is a Python-based image retrieval model that utilizes various machine learn
 - Avadhut Jadhav
 - Malhar Gadge
 - Harshit Raj
+
+## Acknowledgement
+-1
