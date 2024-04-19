@@ -1,0 +1,14 @@
+from sklearn.naive_bayes import GaussianNB
+
+# Initialize Gaussian Naive Bayes classifier
+naive_bayes_classifier = GaussianNB()
+
+# Fit the classifier to the training data
+naive_bayes_classifier.fit(features_pca, labels)
+
+# Make predictions on the test data
+predicted_labels = naive_bayes_classifier.predict(test_features_pca)
+
+# Calculate accuracy
+accuracy = np.mean(predicted_labels == test_labels)
+print("Accuracy:", accuracy)
