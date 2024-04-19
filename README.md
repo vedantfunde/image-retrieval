@@ -9,7 +9,7 @@
 - [Acknowledgement](#acknowledgement)
 
 ## Introduction
-This is a Python-based image retrieval model that utilizes various machine learning techniques. It employs CNN for feature extraction and then uses various ML techniques to varied results. The dataset used here is the CIFAR-10 dataset. You can check out the dataset [here](#).
+This is a Python-based image retrieval model that utilizes various machine learning techniques. It employs CNN for feature extraction and then uses various ML techniques to varied results. The dataset used here is the CIFAR-10 dataset. You can check out the dataset [here](#)<!https://www.cs.toronto.edu/~kriz/cifar.html>.
 
 ## Features
 - This model can be used via GUI as well as the command line.
