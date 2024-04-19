@@ -1,19 +1,19 @@
 from sklearn.tree import DecisionTreeClassifier
-# Load the trained decision tree classifier
+#loading the trained decision tree classifier
 decision_tree_classifier = DecisionTreeClassifier()
 
-# Fit the decision tree classifier to the training data
+#fitting the decision tree classifier to the training data
 decision_tree_classifier.fit(features_pca, labels)
 
-# Load the extracted features for the test data
+#loading the extracted features
 test_extracted_features = np.load('test_extracted_features.npy')
 
-# Load the labels for the test data
+#loading the labels
 test_labels = [test_batch_data[b'labels'][i] for i in range(num_test_images)]
 
-# Make predictions on the test data using the trained classifier
+#making predictions using the trained classifier
 predicted_labels = decision_tree_classifier.predict(test_features_pca)
 
-# Calculate accuracy
+#calculating accuracy
 accuracy = np.mean(predicted_labels == test_labels)
-print("Accuracy:", accuracy)
+#print("Accuracy:", accuracy)
