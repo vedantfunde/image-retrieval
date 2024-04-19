@@ -3,7 +3,7 @@
 ## Contents
 - [Introduction](https://github.com/vedantfunde/supreme-giggle/blob/main/README.md#introduction)
 - [Features](https://github.com/vedantfunde/supreme-giggle/blob/main/README.md#features)
-- [Demo Video](#demo-video)
+- [Demo Video](https://github.com/vedantfunde/supreme-giggle/blob/main/README.md#demovideo)
 - [Contributors](#contributors)
 - [Contribute](#contribute)
 - [Acknowledgement](#acknowledgement)
