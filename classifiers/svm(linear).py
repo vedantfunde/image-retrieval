@@ -1,14 +1,14 @@
 from sklearn.svm import SVC
 
-# Load the trained SVM classifier with RBF kernel
+#loading the trained SVM classifier with RBF kernel
 svm_classifier = SVC(kernel='linear')
 
-# Fit the SVM classifier to the training data
+#fitting the SVM classifier to the training data
 svm_classifier.fit(features_pca, labels)
 
-# Make predictions on the test data using the trained classifier
+#making predictions on the test data using the trained classifier
 predicted_labels = svm_classifier.predict(test_features_pca)
 
-# Calculate accuracy
+#calculating accuracy
 accuracy = np.mean(predicted_labels == test_labels)
-print("Accuracy:", accuracy)
+#print("Accuracy:", accuracy)
