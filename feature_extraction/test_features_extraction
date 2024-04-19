@@ -1,0 +1,21 @@
+# Load the test batch data
+
+
+# Extract features from the test batch images
+num_test_images = 10000  # Assuming there are 10,000 test images
+test_extracted_features = np.zeros((num_test_images, 2048))  # Array to store extracted features for test images
+
+for i in range(num_test_images):
+    # Assuming 'test_batch_data' contains the preprocessed image data as described in the previous code
+    image_data = np.reshape(test_batch_data[b'data'][i], (3, 32, 32)).transpose(1, 2, 0)  # Reshape and transpose to get image data
+    features = extract_features_from_data(image_data, resnet)
+    test_extracted_features[i] = features
+
+
+# Now 'test_extracted_features' contains the extracted features for the test images
+print(test_extracted_features.shape)  # Output: (num_test_images, 2048)
+
+# Save the extracted features of the test batch to a file
+np.save('test_extracted_features.npy', test_extracted_features)
+
+
