@@ -1,8 +1,8 @@
 # Image Retrieval
 
 ## Contents
-- [Introduction](#introduction)
-- [Features](#features)
+- [Introduction](https://github.com/vedantfunde/supreme-giggle/blob/main/README.md#introduction)
+- [Features](https://github.com/vedantfunde/supreme-giggle/blob/main/README.md#features)
 - [Demo Video](#demo-video)
 - [Contributors](#contributors)
 - [Contribute](#contribute)
