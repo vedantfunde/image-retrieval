@@ -41,7 +41,6 @@ num_images = 10000
 extracted_features = np.zeros((num_images, 2048)) 
 
 for i in range(num_images):
-    #assuming 'stored_data' contains the preprocessed image data as described in the previous code
     image_data = np.stack((stored_data[i][b'R'], stored_data[i][b'G'], stored_data[i][b'B']), axis=-1)
     features = extract_features_from_data(image_data, resnet)
     extracted_features[i] = features
