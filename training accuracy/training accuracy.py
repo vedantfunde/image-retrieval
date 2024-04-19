@@ -1,38 +1,28 @@
 import numpy as np
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.neighbors import NearestNeighbors
 import matplotlib.pyplot as plt
 
-# Load the extracted features
+#loading the extracted features
 extracted_features = np.load('extracted_features.npy')
 
-# Load the labels
-labels = [stored_data[i][b'labels'] for i in range(len(stored_data))]
 
-# Initialize the decision tree classifier
-decision_tree = DecisionTreeClassifier()
-
-# Fit the decision tree to the data
-decision_tree.fit(extracted_features, labels)
-
-# Function to retrieve similar images based on a query image
+#function to retrieve similar images based on a query image
 def retrieve_similar_images(query_image_features, k=5):
-    # Predict the category of the query image using the decision tree
+    #predicting the category of the query image using the decision tree
     predicted_label = decision_tree.predict([query_image_features])[0]
 
-    # Find indices of images with the predicted label
+    #finding indices of images with the predicted label
     similar_indices = [i for i, label in enumerate(labels) if label == predicted_label]
 
-    # Use Nearest Neighbors to find k similar images based on their features
+    #using Nearest Neighbors to find k similar images based on their features
     nn_model = NearestNeighbors(n_neighbors=k)
     nn_model.fit(extracted_features[similar_indices])
     distances, indices = nn_model.kneighbors([query_image_features])
 
-    # Return the indices of similar images
+    #returning the indices of similar images
     return [similar_indices[i] for i in indices[0]]
 
-# Function to visualize retrieved images
-# Function to visualize retrieved images
+#function to visualize retrieved images
 def visualize_retrieved_images(query_image_index, similar_image_indices):
     plt.figure(figsize=(10, 5))
     plt.subplot(1, len(similar_image_indices) + 1, 1)
@@ -84,4 +74,4 @@ def calculate_accuracy():
 
 # Calculate accuracy
 accuracy = calculate_accuracy()
-print("Accuracy:", accuracy)
+#print("Accuracy:", accuracy)
