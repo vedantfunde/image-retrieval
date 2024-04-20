@@ -1,14 +1,12 @@
 from sklearn.svm import SVC
 
-#loading the trained SVM classifier with RBF kernel
+# Loading the trained svm classifier
 svm_classifier = SVC(kernel='linear')
 
-#fitting the SVM classifier to the training data
-svm_classifier.fit(features_pca, labels)
+kf = KFold(n_splits=num_folds, shuffle=True, random_state=42)
 
-#making predictions on the test data using the trained classifier
-predicted_labels = svm_classifier.predict(test_features_pca)
+# Cross Validation
+cv_scores = cross_val_score(svm_classifier, features_pca, labels, cv=kf)
 
-#calculating accuracy
-accuracy = np.mean(predicted_labels == test_labels)
-#print("Accuracy:", accuracy)
+print("Cross-validation scores:", cv_scores)
+print("Mean cross-validation score:", np.mean(cv_scores))
