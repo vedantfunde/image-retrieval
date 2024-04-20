@@ -5,6 +5,34 @@ import torchvision.transforms as transforms
 from PIL import Image
 from sklearn.neighbors import NearestNeighbors
 import matplotlib.pyplot as plt
+from sklearn.svm import SVC
+import torch.nn as nn
+import requests
+from io import BytesIO  # Import BytesIO module
+import gdown
+import pickle
+
+url_features_lda = 'https://drive.google.com/uc?id=15vdHeT0xvQcBkPOvF-uae4_dGtqsuK2s'
+gdown.download(url_features_lda, 'features_lda.npy', quiet=False)
+
+features_lda = np.load('features_lda.npy')
+
+url_labels = 'https://drive.google.com/uc?id=1wbW1ZKNyT9bLsaIi1uOmD9HQ4OZeqDqm'
+gdown.download(url_labels, 'labels.npy', quiet=False)
+
+labels = np.load('labels.npy')
+
+url_stored_data = 'https://drive.google.com/uc?id=1pim6rKyVM8K_nGPNtPkI3dwh7_zcSzJY'
+gdown.download(url_stored_data, 'stored_data.pkl', quiet=False)
+
+with open('stored_data.pkl', 'rb') as f:
+    stored_data = pickle.load(f)
+features_lda.shape
+
+
+svm_classifier = SVC(kernel='rbf')
+
+svm_classifier.fit(features_lda, labels)
 
 def extract_features_from_image(input_image, model, lda):
     preprocess = transforms.Compose([
