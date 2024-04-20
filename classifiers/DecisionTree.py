@@ -1,19 +1,21 @@
+from sklearn.model_selection import cross_val_score, KFold
 from sklearn.tree import DecisionTreeClassifier
-#loading the trained decision tree classifier
+
 decision_tree_classifier = DecisionTreeClassifier()
 
-#fitting the decision tree classifier to the training data
-decision_tree_classifier.fit(features_pca, labels)
+num_folds = 5
+kf = KFold(n_splits=num_folds, shuffle=True, random_state=42)
+cv_scores = cross_val_score(decision_tree_classifier, features_pca, labels, cv=kf)
 
-#loading the extracted features
-test_extracted_features = np.load('test_extracted_features.npy')
+# Display the cross-validation scores
+print("Cross-validation scores:", cv_scores)
+print("Mean cross-validation score:", np.mean(cv_scores))
+# decision_tree_classifier.fit(features_pca, labels)
 
-#loading the labels
 test_labels = [test_batch_data[b'labels'][i] for i in range(num_test_images)]
 
-#making predictions using the trained classifier
+# Make predictions
 predicted_labels = decision_tree_classifier.predict(test_features_pca)
 
-#calculating accuracy
 accuracy = np.mean(predicted_labels == test_labels)
-#print("Accuracy:", accuracy)
+print("Accuracy:", accuracy)
