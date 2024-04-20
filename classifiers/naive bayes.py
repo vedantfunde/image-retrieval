@@ -1,14 +1,12 @@
 from sklearn.naive_bayes import GaussianNB
 
-#initialize classifier
+# Initialising the classifier(Gaussian Naive Bayes)
 naive_bayes_classifier = GaussianNB()
 
-#fitting the classifier
-naive_bayes_classifier.fit(features_pca, labels)
+kf = KFold(n_splits=num_folds, shuffle=True, random_state=42)
 
-#make predictions
-predicted_labels = naive_bayes_classifier.predict(test_features_pca)
+# Cross validation
+cv_scores = cross_val_score(naive_bayes_classifier, features_pca, labels, cv=kf)
 
-#calculating accuracy
-accuracy = np.mean(predicted_labels == test_labels)
-print("Accuracy:", accuracy)
+print("Cross-validation scores:", cv_scores)
+print("Mean cross-validation score:", np.mean(cv_scores))
