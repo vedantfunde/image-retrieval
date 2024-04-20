@@ -1,14 +1,13 @@
 from sklearn.ensemble import RandomForestClassifier
 
-#initializing Random Forest classifier with desired parameters
+# Initialize Random Forest classifier with desired parameters
 random_forest_classifier = RandomForestClassifier(n_estimators=100, random_state=42)
 
-#fitting the classifier to the training data
-random_forest_classifier.fit(extracted_features, labels)
+kf = KFold(n_splits=num_folds, shuffle=True, random_state=42)
 
-#making predictions on the test data
-predicted_labels = random_forest_classifier.predict(test_extracted_features)
+# Perform cross-validation
+cv_scores = cross_val_score(random_forest_classifier, features_pca, labels, cv=kf)
 
-#calculating accuracy
-accuracy = np.mean(predicted_labels == test_labels)
-#print("Accuracy:", accuracy)
+# Display the cross-validation scores
+print("Cross-validation scores:", cv_scores)
+print("Mean cross-validation score:", np.mean(cv_scores))
