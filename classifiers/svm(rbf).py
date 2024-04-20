@@ -8,15 +8,24 @@ from PIL import Image
 from sklearn.neighbors import NearestNeighbors
 from sklearn.svm import SVC
 import matplotlib.pyplot as plt
-#loading the trained SVM classifier
-svm_classifier = SVC(kernel='rbf')
 
-#fitting the SVM classifier to the training data
+
+#trained svm loading
+svm_classifier = SVC(kernel='rbf')
+kf = KFold(n_splits=num_folds, shuffle=True, random_state=42)
+
+#cross-validation
+cv_scores = cross_val_score(svm_classifier, features_pca, labels, cv=kf)
+
+print("Cross-validation scores:", cv_scores)
+print("Mean cross-validation score:", np.mean(cv_scores))
+
+
+#fit svm data
 svm_classifier.fit(extracted_features, labels)
 
-#making predictions on the test data using the trained classifier
+#predicting on the test data
 predicted_labels = svm_classifier.predict(test_extracted_features)
 
-#calculating accuracy
 accuracy = np.mean(predicted_labels == test_labels)
-#print("Accuracy:", accuracy)
+print("Accuracy:", accuracy)
