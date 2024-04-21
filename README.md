@@ -13,7 +13,7 @@ This is a Python-based image retrieval model that utilizes various machine learn
 ## Features
 - This model can be used via GUI as well as the command line.
 - Image retrieval can be done by:
-  - An image whose semantically similar images you want to retrieve.
+  - An image whose similar images you want to retrieve.
 
 **Note:** The model performs well when text and images are semantically similar to the images in the dataset.
 
