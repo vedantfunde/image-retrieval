@@ -1,3 +1,5 @@
+#data processing 
+#CIFAR dataset
 import tarfile
 import pickle
 import requests
