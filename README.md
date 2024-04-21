@@ -15,7 +15,7 @@ This is a Python-based image retrieval model that utilizes various machine learn
 - Image retrieval can be done by:
   - An image whose similar images you want to retrieve.
 
-**Note:** The model performs well when text and images are semantically similar to the images in the dataset.
+**Note:** The model performs well when images are similar to the images in the dataset.
 
 ## Demo Video
 [Content Based Image Retrieval](#)
