@@ -7,14 +7,13 @@ num_folds = 5
 kf = KFold(n_splits=num_folds, shuffle=True, random_state=42)
 cv_scores = cross_val_score(decision_tree_classifier, features_pca, labels, cv=kf)
 
-# Display the cross-validation scores
+
 print("Cross-validation scores:", cv_scores)
 print("Mean cross-validation score:", np.mean(cv_scores))
-# decision_tree_classifier.fit(features_pca, labels)
 
 test_labels = [test_batch_data[b'labels'][i] for i in range(num_test_images)]
 
-# Make predictions
+# Predictions
 predicted_labels = decision_tree_classifier.predict(test_features_pca)
 
 accuracy = np.mean(predicted_labels == test_labels)
