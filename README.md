@@ -18,7 +18,7 @@ This is a Python-based image retrieval model that utilizes various machine learn
 **Note:** The model performs well when images are similar to the images in the dataset.
 
 ## Demo Video
-[Content Based Image Retrieval](#)
+[Content Based Image Retrieval](https://www.youtube.com/watch?v=4b2MZ7c-kzU)
 
 ## Contributors
 - Vedant Funde
