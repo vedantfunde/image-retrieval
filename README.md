@@ -28,4 +28,7 @@ This is a Python-based image retrieval model that utilizes various machine learn
 - Harshit Raj
 
 ## Acknowledgement
--1
+- [Deep Residual Learning for Image Recognition by Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun](https://arxiv.org/abs/1512.03385)
+- [Visualizing and Understanding Convolutional Networks by Matthew D Zeiler, Rob Fergus](https://arxiv.org/abs/1311.2901)
+- [Scikit-learn: Machine Learning in Python](https://arxiv.org/abs/1201.0490)
+- Special thanks to our dedicated course instructor [Anand Mishra](https://anandmishra22.github.io/) for their invaluable guidance throughout this project journey.
