@@ -1,3 +1,41 @@
+import gdown
+import numpy as np
+import requests
+from PIL import Image
+import matplotlib.pyplot as plt
+from sklearn.neighbors import NearestNeighbors
+import torch
+import torchvision.transforms as transforms
+import torchvision.models as models
+from io import BytesIO
+import gdown
+import numpy as np
+import pickle
+
+url_features_lda = 'https://drive.google.com/uc?id=15vdHeT0xvQcBkPOvF-uae4_dGtqsuK2s'
+gdown.download(url_features_lda, 'features_lda.npy', quiet=False)
+features_lda = np.load('features_lda.npy')
+
+url_labels = 'https://drive.google.com/uc?id=1wbW1ZKNyT9bLsaIi1uOmD9HQ4OZeqDqm'
+gdown.download(url_labels, 'labels.npy', quiet=False)
+labels = np.load('labels.npy')
+
+url_stored_data = 'https://drive.google.com/uc?id=1pim6rKyVM8K_nGPNtPkI3dwh7_zcSzJY'
+gdown.download(url_stored_data, 'stored_data.pkl', quiet=False)
+with open('stored_data.pkl', 'rb') as f:
+    stored_data = pickle.load(f)
+
+url_lda = 'https://drive.google.com/uc?id=1cPXrQfKlS6klGHt7nvIAJP_eZjMvQHVF'
+gdown.download(url_lda, 'lda.pkl', quiet=False)
+with open('lda.pkl', 'rb') as f:
+    lda = pickle.load(f)
+
+url = 'https://drive.google.com/uc?id=1JNp7ev9NQWJLCUy-cGx5KipfejPlN5kz'
+output = 'svm_classifier.pkl'
+gdown.download(url, output, quiet=False)
+with open('svm_classifier.pkl', 'rb') as f:
+    svm_classifier = pickle.load(f)
+
 import numpy as np
 
 import torchvision.transforms as transforms
@@ -11,15 +49,6 @@ import torch
 import torchvision.transforms as transforms
 import torchvision.models as models
 
-import pickle
-features_lda = np.load('features_lda.npy')
-labels = np.load('labels.npy')
-with open('stored_data.pkl', 'rb') as f:
-    stored_data = pickle.load(f)
-with open('lda.pkl', 'rb') as f:
-    lda = pickle.load(f)
-with open('svm_classifier.pkl', 'rb') as f:
-    svm_classifier = pickle.load(f)
 resnet = models.resnet50(pretrained=True)
 # Remove the last fully connected layer
 resnet = nn.Sequential(*list(resnet.children())[:-1])
@@ -90,6 +119,6 @@ def image_retrieval(input_image_path, resnet, lda):
     similar_image_paths = retrieve_similar_images_from_input_image(input_image_features)
     visualize_retrieved_images(input_image, similar_image_paths)
     return(similar_image_paths)
-# input_image_path = '/content/download (8).jpeg'
-# similar_image_paths=image_retrieval(input_image_path, resnet, lda)
-# print(similar_image_paths)
+input_image_path = '/content/download (8).jpeg'
+similar_image_paths=image_retrieval(input_image_path, resnet, lda)
+print(similar_image_paths)
