@@ -1,3 +1,5 @@
+#UTILISING CNN TO EXTRACT FEATURES
+
 import tarfile
 import pickle
 import requests
@@ -11,15 +13,14 @@ import torchvision.transforms as transforms
 from PIL import Image
 
 
-#loading pre-trained ResNet-50 model
+
 resnet = models.resnet50(pretrained=True)
-#removing the last fully connected layer
 resnet = nn.Sequential(*list(resnet.children())[:-1])
-#setting the model to evaluation mode
+
+#evaluating the model
 resnet.eval()
 
 def extract_features_from_data(image_data, model):
-    #preprocessing the image
     preprocess = transforms.Compose([
         transforms.ToPILImage(),
         transforms.Resize(256),
@@ -33,7 +34,6 @@ def extract_features_from_data(image_data, model):
     #extracting features
     with torch.no_grad():
         features = model(image_tensor)
-    #removing the batch dimension
     features = torch.flatten(features)
     return features.numpy()
 
@@ -44,5 +44,4 @@ for i in range(num_images):
     image_data = np.stack((stored_data[i][b'R'], stored_data[i][b'G'], stored_data[i][b'B']), axis=-1)
     features = extract_features_from_data(image_data, resnet)
     extracted_features[i] = features
-#saving the extracted features to a file
 np.save('extracted_features.npy', extracted_features)
